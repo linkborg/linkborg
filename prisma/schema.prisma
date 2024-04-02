@@ -1,0 +1,164 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  username      String?
+  gh_username   String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  bio           String?
+  socials       Social[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  sites         Site[]
+  newsletter    Boolean?  @default(true)
+  newsletter_id String?
+  theme         String?   @default("dark")
+  welcome_mail  Boolean?  @default(false)
+  apiKeys       ApiKey[]
+}
+
+model Social {
+  id     String  @id @default(cuid())
+  type   String?
+  icon   String?
+  link   String?
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@index([userId])
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  refresh_token_expires_in Int?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Site {
+  id                String   @id @default(cuid())
+  name              String?
+  email             String?  @unique
+  description       String?  @db.Text
+  logo              String?
+  font              String   @default("font-cal")
+  keywords          String?  @db.Text
+  image             String?  @db.Text
+  subdomain         String?  @unique
+  network           String?  @db.VarChar(250)
+  customDomain      String?  @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User?    @relation(fields: [userId], references: [id])
+  userId            String?
+  links             Link[]
+  blocks            Block[]
+  views             Int      @default(0)
+  analytics_code    String?  @default("")
+  analytics_tool    String?  @default("google_analytics")
+  theme             String?  @default("dark")
+  ackee_tracking_id String?
+  layout            String?  @default("column")
+
+  @@unique([subdomain, network], name: "sitesubdomain_network_constraint")
+  @@unique([id, userId], name: "siteid_user_constraint")
+  @@index([userId])
+}
+
+model Link {
+  id          String   @id @default(cuid())
+  title       String?  @db.Text
+  description String?  @db.Text
+  longurl     String?  @db.Text
+  slug        String   @default(cuid())
+  image       String?  @db.Text
+  hidden      Boolean  @default(false)
+  order       Int      @default(0)
+  social      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  site        Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId      String?
+  visits      Int      @default(0)
+
+  @@unique([slug, siteId], name: "linkslug_site_constraint")
+  @@unique([id, siteId], name: "linkid_site_constraint")
+  @@index([siteId])
+}
+
+model Block {
+  id          String   @id @default(cuid())
+  title       String?  @db.Text
+  description String?  @db.Text
+  type        String?  @db.VarChar(50)
+  slug        String   @default(cuid())
+  image       String?  @db.Text
+  hidden      Boolean  @default(false)
+  order       Int      @default(0)
+  data        Json?    @db.Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  site        Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId      String?
+  visits      Int      @default(0)
+
+  @@unique([slug, siteId], name: "blockslug_site_constraint")
+  @@unique([id, siteId], name: "blockid_site_constraint")
+  @@index([siteId])
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
