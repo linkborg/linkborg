@@ -64,10 +64,10 @@ export default function Login() {
             <Card className="mx-auto max-w-sm min-w-[300px] md:min-w-[340px]">
                 <CardHeader>
                     <CardTitle className="text-2xl">
-                        <Link href={"https://vectorize.sh"}>vectorize.sh</Link>
+                        <Link href={"https://linkb.org"}>linkb.org</Link>
                     </CardTitle>
                     <CardDescription>
-                        Vectorize, instantly.
+                        Share, instantly.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

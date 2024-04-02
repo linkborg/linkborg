@@ -71,7 +71,7 @@ export async function addSubscriberToList(subscriber_id: string) {
         body: JSON.stringify({
             ids: [subscriber_id].map(num => parseInt(num)),
             action: "add",
-            target_list_ids: [4],
+            target_list_ids: [5],
             status: "confirmed"
         }),
     });
@@ -107,15 +107,15 @@ export async function removeSubscriberFromList(subscriber_id: string) {
 
 export async function sendTransactionEmail(template_name: string, email: string, data: object) {
     
-    let template_id = 4;
-    let from_email = "vectorize.sh <noreply@vectorize.sh>"
+    let template_id = 5;
+    let from_email = "Linkborg <noreply@linkb.org>"
     
     if (template_name === "login"){
-        template_id = 4;
+        template_id = 5;
     }
     else if (template_name === "welcome"){
-        template_id = 5;
-        from_email = "Anubhav from vectorize.sh<anubhav@vectorize.sh>";
+        template_id = 6;
+        from_email = "Anubhav from Linkborg<anubhav@linkb.org>";
     }
     
     const response = await fetch(`${LISTMONK_URL}/tx`, {
