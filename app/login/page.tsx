@@ -6,8 +6,8 @@ import {redirect} from "next/navigation";
 import {authOptions} from "@/lib/auth";
 
 export const metadata: Metadata = {
-    title: 'Login - Vectorize.sh',
-    description: 'Effortlessly turn your documents into searchable vectors with a single command.',
+    title: 'Login - linkb.org',
+    description: 'Ultimate link sharing platform',
 }
 
 export default async function Page() {

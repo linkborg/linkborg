@@ -44,7 +44,7 @@ function PrivateNavEl() {
             <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold">
                     {/*<AngleIcon className="h-5 w-5 -rotate-[65deg] mb-1"/>*/}
-                    <span>vectorize.sh</span>
+                    <span>linkb.org</span>
                 </Link>
                 <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
                     {/*<BellIcon className="h-4 w-4"/>*/}
@@ -61,7 +61,7 @@ function PrivateNavEl() {
                         Dashboard
                     </Link>
                     <Link
-                        href="/sites"
+                        href="/app/sites"
                         className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/indexes') ? "bg-muted text-primary" : "text-muted-foreground"}`}
                     >
                         {/*<StackIcon className="h-4 w-4"/>*/}
