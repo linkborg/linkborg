@@ -21,7 +21,7 @@ export default async function Page({params} : {params: {siteId: string}}) {
         redirect("/login")
     }
     
-    const site = await GetSiteById({siteId})
+    const site = await GetSiteById(user, siteId)
     
     return (
         <AuthLayout>
