@@ -7,6 +7,7 @@ import {Button} from "@/components/ui/button";
 import { usePathname } from 'next/navigation'
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {LogoutButton} from "@/components/common/logout-button";
+import {Bell, Globe, Home, Menu, Settings, Settings2} from "lucide-react";
 
 
 export default function PrivateNav () {
@@ -22,7 +23,7 @@ export default function PrivateNav () {
                         size="icon"
                         className="shrink-0 md:hidden"
                     >
-                        {/*<HamburgerMenuIcon className="h-6 w-6" />*/}
+                        <Menu className="h-6 w-6" />
                         <span className="sr-only">Toggle navigation menu</span>
                     </Button>
                 </SheetTrigger>
@@ -47,7 +48,7 @@ function PrivateNavEl() {
                     <span>linkb.org</span>
                 </Link>
                 <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-                    {/*<BellIcon className="h-4 w-4"/>*/}
+                    <Bell className="h-4 w-4"/>
                     <span className="sr-only">Toggle notifications</span>
                 </Button>
             </div>
@@ -57,14 +58,14 @@ function PrivateNavEl() {
                         href="/dashboard"
                         className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/dashboard') ? "bg-muted text-primary" : "text-muted-foreground"}`}
                     >
-                        {/*<HomeIcon className="h-4 w-4"/>*/}
+                        <Home className="h-4 w-4"/>
                         Dashboard
                     </Link>
                     <Link
-                        href="/app/sites"
-                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/indexes') ? "bg-muted text-primary" : "text-muted-foreground"}`}
+                        href="/sites"
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/sites') ? "bg-muted text-primary" : "text-muted-foreground"}`}
                     >
-                        {/*<StackIcon className="h-4 w-4"/>*/}
+                        <Globe className="h-4 w-4"/>
                         Sites {" "}
                     </Link>
                 </nav>
@@ -74,7 +75,7 @@ function PrivateNavEl() {
                     href="/settings"
                     className={`flex items-center gap-3 mb-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/settings') ? "bg-muted text-primary" : "text-muted-foreground"}`}
                 >
-                    {/*<GearIcon className="h-4 w-4"/>*/}
+                    <Settings className="h-4 w-4"/>
                     Settings
                 </Link>
                 <LogoutButton />

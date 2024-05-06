@@ -1,29 +1,30 @@
-import {Dashboard} from "@/app/dashboard/dashboard";
+import React from "react";
+import {Metadata} from "next";
 import AuthLayout from "@/app/auth-layout";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
-import {Metadata} from "next";
-
 import {redirect} from "next/navigation";
 import {GetSitesList} from "@/lib/queries/sites";
+import {Sites} from "@/app/sites/sites";
 
 export const metadata: Metadata = {
-    title: 'Dashboard - linkb.org',
-    description: 'The ultimate link sharing platform',
+    title: 'Sites - Vectorize.sh',
+    description: 'Effortlessly turn your documents into searchable vectors with a single command.',
 }
+
 export default async function Page() {
-    const session = await getServerSession(authOptions);
-    const user = session?.user;
     
+    const session = await getServerSession(authOptions);
+    const user = session?.user
     if(!user){
         redirect("/login")
     }
     
-    const sites = await GetSitesList(user)
+    const indexes = await GetSitesList(user)
     
     return (
         <AuthLayout>
-            <Dashboard initData={sites} />
+            <Sites initData={indexes} />
         </AuthLayout>
-    );
+    )
 }

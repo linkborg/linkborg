@@ -1,11 +1,16 @@
 import prisma from "@/lib/prisma";
-import {Session} from "next-auth";
-import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/lib/auth";
+import {User} from "next-auth";
 
-export const GetSitesList = async () => {
-    const { user } = await getServerSession(authOptions) as Session;
-    
+export const GetSiteById = async ({user, siteId}: {user: User, siteId: string}) => {
+    return prisma.site.findUniqueOrThrow({
+        where: {
+            id: siteId,
+            userId: user.id,
+        }
+    })
+}
+
+export const GetSitesList = async (user: User) => {
     return prisma.site.findMany({
         where: {
             userId: user?.id || "",

@@ -40,10 +40,10 @@ export function Dashboard({initData} : {initData?: any}) {
                                 You have no apps
                             </h3>
                             <p className="text-sm text-muted-foreground">
-                                Create an index to get started
+                                Create a site to get started
                             </p>
-                            <Link href={"/indexes/new"}>
-                                <Button className="mt-4">Add Index</Button>
+                            <Link href={"/sites/new"}>
+                                <Button className="mt-4">Add Site</Button>
                             </Link>
                         </div>
                     </div>
