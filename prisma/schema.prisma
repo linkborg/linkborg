@@ -22,6 +22,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   sites         Site[]
+  slugs         Slug[]
   newsletter    Boolean?  @default(true)
   newsletter_id String?
   theme         String?   @default("dark")
@@ -159,6 +160,16 @@ model ApiKey {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Slug {
+  id        String   @id @default(cuid())
+  slugType  String   @default("subdomain")
+  data      Json
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

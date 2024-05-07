@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import {User} from "next-auth";
+import {SiteCreateRequest} from "@/types/sites";
 
 export const GetSiteById = async (user: User, siteId: string) => {
     return prisma.site.findUniqueOrThrow({
@@ -16,4 +17,16 @@ export const GetSitesList = async (user: User) => {
             userId: user?.id || "",
         }
     });
+}
+
+
+export const CreateSite = async (data: SiteCreateRequest) => {
+    return prisma.site.create({
+        data: {
+            id: data.subdomain,
+            name: data.name,
+            userId: data.user.id,
+            subdomain: data.subdomain,
+        }
+    })
 }

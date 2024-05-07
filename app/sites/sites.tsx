@@ -39,7 +39,7 @@ export function Sites({initData}:{initData?: Site[]}) {
                                         <CardHeader className={"w-full flex flex-row items-center justify-between"}>
                                             <span>{item.name}</span>
                                             <div className={"flex flex-row !m-0"}>
-                                                <Link className={"mr-2"} key={`db-settings-${item.id}`} href={`/indexes/${item.subdomain}`}>
+                                                <Link className={"mr-2"} key={`db-settings-${item.id}`} href={`/sites/${item.subdomain}`}>
                                                     <Settings className={"h-8 w-8 p-2 rounded-full bg-gray-100 hover:bg-gray-300"}/>
                                                 </Link>
                                             </div>

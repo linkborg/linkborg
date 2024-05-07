@@ -20,11 +20,11 @@ export default async function Page() {
         redirect("/login")
     }
     
-    const indexes = await GetSitesList(user)
+    const sites = await GetSitesList(user)
     
     return (
         <AuthLayout>
-            <Sites initData={indexes} />
+            <Sites initData={sites} />
         </AuthLayout>
     )
 }

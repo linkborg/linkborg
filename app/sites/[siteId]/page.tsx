@@ -8,7 +8,7 @@ import {GetSiteById} from "@/lib/queries/sites";
 import {redirect} from "next/navigation";
 
 export const metadata: Metadata = {
-    title: 'Index Details - Vectorize.sh',
+    title: 'Site Details - linkb.org',
     description: 'Effortlessly turn your documents into searchable vectors with a single command.',
 }
 
