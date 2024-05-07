@@ -20,11 +20,13 @@ const middleware = async (req: NextRequest) => {
     const path = url.pathname;
     
     if (hostname === 'api.linkb.org' || (!isProd && hostname.startsWith('api.localhost'))) {
-        if (!apiKey) {
-            return new Response('API key required', { status: 401 });
+        if (!path.startsWith('/public')) {
+            if (!apiKey) {
+                return new Response('API key required', {status: 401});
+            }
         }
         return NextResponse.rewrite(
-            new URL(`/api/${path}`, req.url)
+            new URL(`/api${path}`, req.url)
         );
     }
     
