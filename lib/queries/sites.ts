@@ -9,8 +9,12 @@ export const GetSiteByIdPublic = async (siteId: string) => {
         where: {
             id: siteId,
         },
-        include: {
-            user: true,
+        select: {
+            name: true,
+            description: true,
+            logo: true,
+            image: true,
+            analytics_code: true,
             blocks: true,
         }
     })
