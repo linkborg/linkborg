@@ -72,7 +72,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 					</div>
 				</div>
 				<TabsContent value="active">
-					<Card x-chunk="dashboard-06-chunk-0">
+					<Card>
 						<CardHeader>
 							<CardTitle>Active Links</CardTitle>
 						</CardHeader>
@@ -80,9 +80,9 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 							<Table>
 								<TableHeader>
 									<TableRow>
-										<TableHead>Title</TableHead>
-										<TableHead className="hidden sm:table-cell">URL</TableHead>
-										<TableHead className="hidden sm:table-cell">Created</TableHead>
+										<TableHead className={"hidden sm:table-cell"}>Title</TableHead>
+										<TableHead>URL</TableHead>
+										<TableHead className="hidden lg:table-cell">Created</TableHead>
 										<TableHead className="hidden md:table-cell">Clicks</TableHead>
 										<TableHead className="text-right"></TableHead>
 									</TableRow>
@@ -91,18 +91,18 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 									{
 										initData.map((item) => (
 											<TableRow key={`link-list-key-${item.id}`}>
-												<TableCell>
+												<TableCell className={"hidden sm:table-cell"}>
 													<div className="font-medium">{item.title}</div>
 												</TableCell>
 												<TableCell>
-													<div className="font-medium">
-														https://{item.siteId}.{process.env.NEXT_PUBLIC_SITE_DOMAIN}/{item.slug}
+													<div className="font-medium max-w-[180px] sm:max-w-[180px] md:max-w-[250px] lg:w-full overflow-hidden break-words">
+														{item.siteId}.{process.env.NEXT_PUBLIC_SITE_DOMAIN}/{item.slug}
 													</div>
-													<div className="text-sm">
+													<div className="hidden text-sm text-muted-foreground md:inline">
 														{item.longurl}
 													</div>
 												</TableCell>
-												<TableCell className="hidden sm:table-cell">
+												<TableCell className="hidden lg:table-cell">
 													{formatDate(item.createdAt.toString())}
 												</TableCell>
 												<TableCell className="hidden md:table-cell">{item.visits}</TableCell>

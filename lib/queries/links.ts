@@ -12,7 +12,7 @@ export const GetLinkBySlugPublic = async (linkSlug: string, siteId: string) => {
 		select: {
 			title: true,
 			description: true,
-			image: true,
+			longurl: true,
 		}
 	})
 }
