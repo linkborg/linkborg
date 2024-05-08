@@ -9,6 +9,12 @@ async function sendVerificationRequest(params: { identifier: string, url: string
         url: url
     };
     
+    if(process.env.EMAIL_PROVIDER === "local"){
+        console.log("Email provider is local, skipping email sending");
+        console.log(data);
+        return;
+    }
+    
     try {
         await addSubscriber({
             email: identifier,
