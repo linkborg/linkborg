@@ -64,7 +64,7 @@ export default function Login() {
             <Card className="mx-auto max-w-sm min-w-[300px] md:min-w-[340px]">
                 <CardHeader>
                     <CardTitle className="text-2xl">
-                        <Link href={"https://linkb.org"}>linkb.org</Link>
+                        <Link href={`https://${process.env.SITE_DOMAIN}`}>{process.env.SITE_DOMAIN}</Link>
                     </CardTitle>
                     <CardDescription>
                         Share, instantly.

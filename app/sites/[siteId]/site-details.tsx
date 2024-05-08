@@ -82,7 +82,7 @@ export function SiteDetails({initData}: { initData?: Site }) {
                     </CardFooter>
                 </Card>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 text-center">
-                    <Link key={`app-key-${initData?.id}-chat`} target={"_blank"} href={`https://${initData?.id}.linkb.org`}>
+                    <Link key={`app-key-${initData?.id}-chat`} target={"_blank"} href={`https://${initData?.id}.${process.env.SITE_DOMAIN}`}>
                         <Card className={"border border-dashed hover:bg-green-50"}>
                             <CardHeader className={"flex flex-row items-center text-center"}>
                                 <div className={"flex flex-row items-center justify-between"}>
@@ -95,7 +95,7 @@ export function SiteDetails({initData}: { initData?: Site }) {
                             </CardFooter>
                         </Card>
                     </Link>
-                    <Link key={`app-key-${initData?.id}-api`} target={"_blank"} href={`https://${initData?.id}.linkb.org/swagger`}>
+                    <Link key={`app-key-${initData?.id}-api`} target={"_blank"} href={`https://${initData?.id}.${process.env.SITE_DOMAIN}/swagger`}>
                         <Card className={"border border-dashed hover:bg-blue-50"}>
                             <CardHeader className={"flex flex-row items-center text-center"}>
                                 <div className={"flex flex-row items-center justify-between"}>

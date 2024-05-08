@@ -6,8 +6,8 @@ import {NextAuthProvider} from "@/app/session-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LinkBorg",
-  description: "The ultimate link shortener platform - linkb.org",
+  title: `LinkBorg - ${process.env.SITE_DOMAIN}`,
+  description: "The ultimate link shortener platform",
 };
 
 export default function RootLayout({children}: Readonly<{

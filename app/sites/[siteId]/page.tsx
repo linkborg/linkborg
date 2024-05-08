@@ -8,8 +8,8 @@ import {GetSiteById} from "@/lib/queries/sites";
 import {redirect} from "next/navigation";
 
 export const metadata: Metadata = {
-    title: 'Site Details - linkb.org',
-    description: 'Effortlessly turn your documents into searchable vectors with a single command.',
+    title: `Site Details - ${process.env.SITE_DOMAIN}`,
+    description: 'The ultimate link shortener platform',
 }
 
 export default async function Page({params} : {params: {siteId: string}}) {

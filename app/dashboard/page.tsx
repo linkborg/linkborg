@@ -8,9 +8,10 @@ import {redirect} from "next/navigation";
 import {GetSitesList} from "@/lib/queries/sites";
 
 export const metadata: Metadata = {
-    title: 'Dashboard - linkb.org',
+    title: `Dashboard - ${process.env.SITE_DOMAIN}`,
     description: 'The ultimate link sharing platform',
 }
+
 export default async function Page() {
     const session = await getServerSession(authOptions);
     const user = session?.user;

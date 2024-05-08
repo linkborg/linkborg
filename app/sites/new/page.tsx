@@ -7,7 +7,7 @@ import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
 
 export const metadata: Metadata = {
-    title: 'New Site - linkb.org',
+    title: `New Site - ${process.env.SITE_DOMAIN}`,
     description: 'The ultimate link shortener platform',
 }
 
