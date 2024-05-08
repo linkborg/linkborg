@@ -7,7 +7,7 @@ import {Button} from "@/components/ui/button";
 import { usePathname } from 'next/navigation'
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {LogoutButton} from "@/components/common/logout-button";
-import {Bell, Globe, Home, Menu, Settings, Settings2} from "lucide-react";
+import {Bell, Globe, Home, Link2, Menu, Settings, Settings2} from "lucide-react";
 
 
 export default function PrivateNav () {
@@ -21,7 +21,7 @@ export default function PrivateNav () {
                     <Button
                         variant="outline"
                         size="icon"
-                        className="shrink-0 md:hidden"
+                        className="shrink-0 md:hidden h-8"
                     >
                         <Menu className="h-6 w-6" />
                         <span className="sr-only">Toggle navigation menu</span>
@@ -67,6 +67,13 @@ function PrivateNavEl() {
                     >
                         <Globe className="h-4 w-4"/>
                         Sites {" "}
+                    </Link>
+                    <Link
+                        href="/links"
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname.startsWith('/links') ? "bg-muted text-primary" : "text-muted-foreground"}`}
+                    >
+                        <Link2 className="h-4 w-4"/>
+                        Links {" "}
                     </Link>
                 </nav>
             </div>

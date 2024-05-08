@@ -16,6 +16,7 @@ export const GetSiteByIdPublic = async (siteId: string) => {
             image: true,
             analytics_code: true,
             blocks: true,
+            links: true,
         }
     })
 }
@@ -25,6 +26,9 @@ export const GetSiteById = async (user: User, siteId: string) => {
         where: {
             id: siteId,
             userId: user.id,
+        },
+        include: {
+            links: true
         }
     })
 }

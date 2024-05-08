@@ -91,7 +91,7 @@ export const NewSiteForm = ({initData}:{initData?: any}) => {
                                 <div className="relative">
                                     <div
                                         className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <span className="text-gray-700 dark:text-gray-400">${process.env.NEXT_PUBLIC_SITE_DOMAIN}/</span>
+                                        <span className="text-gray-700 dark:text-gray-400">{process.env.NEXT_PUBLIC_SITE_DOMAIN}/</span>
                                     </div>
                                     <Input className="pl-[5.35rem]"
                                        value={siteSubdomain}
