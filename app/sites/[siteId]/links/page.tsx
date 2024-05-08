@@ -5,6 +5,7 @@ import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import {GetLinksListBySite} from "@/lib/queries/links";
+import {SiteLinks} from "@/app/sites/[siteId]/links/site-links-page";
 import {GetSitesList} from "@/lib/queries/sites";
 
 export const metadata: Metadata = {
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 	description: 'The ultimate link shortener platform',
 }
 
-export default async function Page() {
+export default async function Page({params} : {params: {siteId: string}}) {
+	const siteId = params.siteId;
 	
 	const session = await getServerSession(authOptions);
 	const user = session?.user
@@ -22,5 +24,17 @@ export default async function Page() {
 	
 	const sites = await GetSitesList(user);
 	
-	redirect(`/sites/${sites[0].id}/links`)
+	const activeSite = sites.find((site) => site.id === siteId);
+	
+	if (!activeSite) {
+		redirect("/sites")
+	}
+	
+	const links = await GetLinksListBySite(siteId)
+	
+	return (
+		<AuthLayout>
+			<SiteLinks initData={links} sites={sites} activeSite={activeSite} />
+		</AuthLayout>
+	)
 }

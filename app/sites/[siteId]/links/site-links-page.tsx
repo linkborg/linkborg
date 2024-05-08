@@ -4,16 +4,19 @@ import { Button } from "@/components/ui/button"
 import React from "react";
 import Navigation from "@/components/navigation";
 import Link from "next/link";
-import {Link as SiteLink} from "@prisma/client"
+import {Link as SiteLink, Site} from "@prisma/client"
 import {LinksList} from "@/app/links/links-list";
+import {LinksSiteSelector} from "@/app/links/links-site-selector";
 
-export function Links({initData}:{initData?: SiteLink[]}) {
+export function SiteLinks({initData, sites, activeSite}:{initData: SiteLink[], sites: Site[], activeSite: Site}) {
+	
 	return (
 		<>
 			<div className="flex items-center justify-between">
 				<h1 className="text-lg font-semibold md:text-2xl">Links</h1>
 				<div className={"block md:hidden"}><Navigation/></div>
 			</div>
+			<LinksSiteSelector sites={sites} activeSite={activeSite} />
 			{
 				initData?.length === 0 ? (
 					<div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
@@ -24,14 +27,14 @@ export function Links({initData}:{initData?: SiteLink[]}) {
 							<p className="text-sm text-muted-foreground">
 								Get started by creating a link.
 							</p>
-							<Link href={"/links/new"} className={"mt-4"}>
+							<Link href={`/sites/${activeSite.id}/links/new`} className={"mt-4"}>
 								<Button>Create Link</Button>
 							</Link>
 						</div>
 					</div>
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 text-center">
-						<LinksList initData={initData} />
+					<div className="w-full">
+						<LinksList initData={initData} siteId={activeSite.id} />
 					</div>
 				)
 			}

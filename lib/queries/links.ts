@@ -42,6 +42,7 @@ export const CreateLink = async (data: LinkCreateRequest) => {
 			title: data.title,
 			siteId: data.siteId,
 			slug: data.slug,
+			longurl: data.longurl,
 		}
 	})
 }

@@ -47,7 +47,7 @@ export function SiteDetails({initData}: { initData: any }) {
             <main className="flex-1 items-start p-4 sm:px-6 sm:py-0 md:gap-8">
                 <div className={"flex flex-row flex-grow gap-4 items-start justify-between"}>
                     <div className={"flex-1 flex-col p-0"}>
-                        <Card className={"mb-4"}>
+                        <Card className={"mb-8"}>
                         <CardHeader className="space-y-0 p-4 flex flex-row items-start bg-muted/50">
                             <div className="grid gap-0.5">
                                 <CardTitle className="group flex items-center gap-2 text-lg">
@@ -105,7 +105,7 @@ export function SiteDetails({initData}: { initData: any }) {
                             </div>
                         </CardFooter>
                     </Card>
-                        <LinksList initData={initData.links} />
+                        <LinksList initData={initData.links} siteId={initData.id} />
                     </div>
                     <div className={"hidden md:block h-full"}>
                         <SitePreview initData={initData} />
