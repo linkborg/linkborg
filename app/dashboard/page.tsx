@@ -8,7 +8,7 @@ import {redirect} from "next/navigation";
 import {GetSitesList} from "@/lib/queries/sites";
 
 export const metadata: Metadata = {
-    title: `Dashboard - ${process.env.SITE_DOMAIN}`,
+    title: `Dashboard - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
     description: 'The ultimate link sharing platform',
 }
 

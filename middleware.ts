@@ -7,7 +7,7 @@ interface EnvConfig {
 
 const getEnvironmentConfig = (): EnvConfig => {
     const nextAuthUrl = process.env.NEXTAUTH_URL || '';
-    const isProd = nextAuthUrl.includes(process.env.SITE_DOMAIN as string);
+    const isProd = nextAuthUrl.includes(process.env.NEXT_PUBLIC_SITE_DOMAIN as string);
     return { isProd };
 };
 
@@ -19,7 +19,7 @@ const middleware = async (req: NextRequest) => {
     const url = req.nextUrl;
     const path = url.pathname;
     
-    if (hostname === `api.${process.env.SITE_DOMAIN}` || (!isProd && hostname.startsWith('api.localhost'))) {
+    if (hostname === `api.${process.env.NEXT_PUBLIC_SITE_DOMAIN}` || (!isProd && hostname.startsWith('api.localhost'))) {
         if (!path.startsWith('/public')) {
             if (!apiKey) {
                 return new Response('API key required', {status: 401});

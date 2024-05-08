@@ -45,7 +45,7 @@ function PrivateNavEl() {
             <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold">
                     {/*<AngleIcon className="h-5 w-5 -rotate-[65deg] mb-1"/>*/}
-                    <span>linkb.org</span>
+                    <span>{process.env.NEXT_PUBLIC_SITE_DOMAIN}</span>
                 </Link>
                 <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
                     <Bell className="h-4 w-4"/>

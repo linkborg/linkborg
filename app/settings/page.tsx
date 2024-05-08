@@ -8,8 +8,8 @@ import {redirect} from "next/navigation";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
-    title: 'Settings - Vectorize.sh',
-    description: 'Effortlessly turn your documents into searchable vectors with a single command.',
+    title: `Settings - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
+    description: 'The ultimate link shortener platform',
 }
 
 export default async function Page() {

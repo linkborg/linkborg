@@ -17,7 +17,7 @@ export function Dashboard({initData} : {initData?: any}) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 text-center">
                         {initData.map((app: any) => {
                             return (
-                                <Link key={`app-key-${app.id}`} target={"_blank"} href={`https://${app.subdomain}.${process.env.SITE_DOMAIN}`}>
+                                <Link key={`app-key-${app.id}`} target={"_blank"} href={`https://${app.subdomain}.${process.env.NEXT_PUBLIC_SITE_DOMAIN}`}>
                                     <Card className={"border border-dashed hover:bg-green-50"}>
                                         <CardHeader className={"flex flex-row items-center text-center"}>
                                             <div className={"flex flex-row items-center justify-between"}>

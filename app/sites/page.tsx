@@ -8,8 +8,8 @@ import {GetSitesList} from "@/lib/queries/sites";
 import {Sites} from "@/app/sites/sites";
 
 export const metadata: Metadata = {
-    title: 'Sites - Vectorize.sh',
-    description: 'Effortlessly turn your documents into searchable vectors with a single command.',
+    title: `Sites - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
+    description: 'The ultimate link shortener platform',
 }
 
 export default async function Page() {

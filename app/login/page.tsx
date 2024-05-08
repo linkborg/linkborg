@@ -6,7 +6,7 @@ import {redirect} from "next/navigation";
 import {authOptions} from "@/lib/auth";
 
 export const metadata: Metadata = {
-    title: `Login - ${process.env.SITE_DOMAIN}`,
+    title: `Login - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
     description: 'Ultimate link sharing platform',
 }
 

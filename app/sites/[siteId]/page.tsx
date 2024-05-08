@@ -8,7 +8,7 @@ import {GetSiteById} from "@/lib/queries/sites";
 import {redirect} from "next/navigation";
 
 export const metadata: Metadata = {
-    title: `Site Details - ${process.env.SITE_DOMAIN}`,
+    title: `Site Details - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
     description: 'The ultimate link shortener platform',
 }
 
