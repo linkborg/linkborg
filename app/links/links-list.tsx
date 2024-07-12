@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import React from "react";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Navigation from "@/components/navigation";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Site} from "@prisma/client";
@@ -28,6 +30,30 @@ import {
 } from "@/components/ui/table"
 import {formatDate} from "@/lib/utils";
 
+
+
+const handleEdit = (linkId: string) => {
+    // Navigate to edit page or open edit modal
+    router.push(`/sites/${siteId}/links/${linkId}/edit`);
+};
+
+const handleDelete = async (linkId: string) => {
+    if (confirm("Are you sure you want to delete this link?")) {
+        try {
+            const response = await fetch(`/api/sites/${siteId}/links/${linkId}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                // Remove the deleted link from the local state
+                setInitData(prevData => prevData.filter(link => link.id !== linkId));
+            } else {
+                console.error("Failed to delete link");
+            }
+        } catch (error) {
+            console.error("Error deleting link:", error);
+        }
+    }
+};
 
 export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: string}) {
 	return (
@@ -120,8 +146,8 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 														</DropdownMenuTrigger>
 														<DropdownMenuContent align="end">
 															<DropdownMenuLabel>Actions</DropdownMenuLabel>
-															<DropdownMenuItem>Edit</DropdownMenuItem>
-															<DropdownMenuItem>Delete</DropdownMenuItem>
+															<DropdownMenuItem onClick={() => handleEdit(item.id)}>Edit</DropdownMenuItem>
+															<DropdownMenuItem onClick={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
 														</DropdownMenuContent>
 													</DropdownMenu>
 												</TableCell>
