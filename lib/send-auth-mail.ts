@@ -1,4 +1,4 @@
-import {addSubscriber, sendTransactionEmail} from "@/lib/listmonk";
+import {sendTransactionEmail} from "@/lib/plunk";
 
 async function sendVerificationRequest(params: { identifier: string, url: string }) {
     
@@ -13,18 +13,6 @@ async function sendVerificationRequest(params: { identifier: string, url: string
         console.log("Email provider is local, skipping email sending");
         console.log(data);
         return;
-    }
-    
-    try {
-        await addSubscriber({
-            email: identifier,
-            name: identifier,
-            status: "enabled",
-            lists: [4],
-            preconfirm_subscriptions: true
-        })
-    } catch (error) {
-        console.log(`Subscriber not added, already exists!`)
     }
     
     try{
