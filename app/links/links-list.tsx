@@ -31,31 +31,31 @@ import {
 import {formatDate} from "@/lib/utils";
 
 
-
-const handleEdit = (linkId: string) => {
-    // Navigate to edit page or open edit modal
-    router.push(`/sites/${siteId}/links/${linkId}/edit`);
-};
-
-const handleDelete = async (linkId: string) => {
-    if (confirm("Are you sure you want to delete this link?")) {
-        try {
-            const response = await fetch(`/api/sites/${siteId}/links/${linkId}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                // Remove the deleted link from the local state
-                setInitData(prevData => prevData.filter(link => link.id !== linkId));
-            } else {
-                console.error("Failed to delete link");
-            }
-        } catch (error) {
-            console.error("Error deleting link:", error);
-        }
-    }
-};
-
 export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: string}) {
+	const router = useRouter();
+	const [data, setData] = useState(initData);
+
+	const handleEdit = (linkId: string) => {
+		router.push(`/sites/${siteId}/links/${linkId}/edit`);
+	};
+	
+	const handleDelete = async (linkId: string) => {
+		if (confirm("Are you sure you want to delete this link?")) {
+			try {
+				const response = await fetch(`/api/sites/${siteId}/links/${linkId}`, {
+					method: 'DELETE',
+				});
+				if (response.ok) {
+					setData(prevData => prevData.filter(link => link.id !== linkId));
+				} else {
+					console.error("Failed to delete link");
+				}
+			} catch (error) {
+				console.error("Error deleting link:", error);
+			}
+		}
+	};
+
 	return (
 		<>
 			<Tabs defaultValue="active">
