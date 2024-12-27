@@ -14,7 +14,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { siteId: s
     const site = await GetSiteById(user, siteId);
 
     if (site) {
-        await DeleteLink(linkId, site.id);
+        await DeleteLink({id: linkId});
         return NextResponse.json({ message: "Link deleted successfully" });
     } else {
         return NextResponse.json({ error: "Site not found or unauthorized" }, { status: 404 });

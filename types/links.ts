@@ -6,3 +6,15 @@ export interface LinkCreateRequest {
 	longurl: string;
 	siteId: string;
 }
+
+export interface LinkUpdateRequest {
+	id: string;
+	title: string;
+	slug: string;
+	longurl: string;
+	siteId: string;
+}
+
+export interface LinkDeleteRequest {
+	id: string;
+}
