@@ -3,10 +3,8 @@
 import { Button } from "@/components/ui/button"
 import React from "react";
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Navigation from "@/components/navigation";
+import { useRouter } from 'next/navigation';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {Site} from "@prisma/client";
 import Link from "next/link";
 import {Link as SiteLink} from "@prisma/client"
 import {Copy, Settings, PlusCircle, ListFilter, MoreHorizontal} from "lucide-react"
