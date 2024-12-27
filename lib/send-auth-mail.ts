@@ -5,8 +5,8 @@ async function sendVerificationRequest(params: { identifier: string, url: string
     const {identifier, url} = params;
     
     const data = {
-        email: identifier,
-        url: url
+        to_email: identifier,
+        action_url: url
     };
     
     if(process.env.EMAIL_PROVIDER === "local"){
