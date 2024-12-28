@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {NextAuthProvider} from "@/app/session-provider";
 import { ThemeProvider } from "@/app/theme-provider"
+import UmamiProvider from 'next-umami'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,9 @@ export default function RootLayout({children}: Readonly<{
 }>) {
   return (
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <UmamiProvider src={process.env.NEXT_PUBLIC_UMAMI_SRC || ""} websiteId={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ""} />
+        </head>        
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
