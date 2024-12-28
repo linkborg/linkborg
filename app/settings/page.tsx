@@ -25,10 +25,16 @@ export default async function Page() {
             revoked: false
         }
     })
+
+    const userData = await prisma.user.findUnique({     
+        where: {
+            id: user?.id
+        }
+    })
     
     return (
         <AuthLayout>
-            <Settings initData={keys} />
+            <Settings initData={keys} userData={userData} />
         </AuthLayout>
     )
 }

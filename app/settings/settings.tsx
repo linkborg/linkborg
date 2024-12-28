@@ -6,20 +6,15 @@ import Navigation from "@/components/navigation";
 import {CardContent, CardDescription, CardHeader, CardTitle, Card} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import {Tabs, TabsTrigger, TabsContent, TabsList} from '@/components/ui/tabs';
-import {DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuLabel, DropdownMenuSeparator} from "@/components/ui/dropdown-menu";
 import {
-    File,
-    ListFilter,
-    PieChart,
-    Redo,
-    PlusCircle, Copy, RefreshCw,
+    PlusCircle, Copy, RefreshCw, MessageCircleWarning, AlertTriangle
 } from "lucide-react"
 import {ApiKey} from "@prisma/client";
 // import {CopyIcon, ExclamationTriangleIcon, PieChartIcon, PlusCircledIcon, ReloadIcon} from "@radix-ui/react-icons";
 import copyTextToClipboard from "copy-text-to-clipboard";
 import {useRouter} from "next/navigation";
 
-export function Settings({initData}:{initData?: any | null}) {
+export function Settings({initData, userData}:{initData?: any | null, userData?: any | null}) {
     
     const [loading, setLoading] = useState(false);
     const [apiKeyData, setApiKeyData] = useState<any>(initData);
@@ -50,23 +45,41 @@ export function Settings({initData}:{initData?: any | null}) {
                         <TabsList>
                             <TabsTrigger value="account">Account</TabsTrigger>
                             <TabsTrigger value="apikey">API</TabsTrigger>
-                            <TabsTrigger value="draft">Custom Domains</TabsTrigger>
+                            <TabsTrigger value="custom-domains">Custom Domains</TabsTrigger>
                         </TabsList>
                     </div>
                     <TabsContent value="account">
-                        <Card x-chunk="dashboard-06-chunk-0">
+                        <Card>
                             <CardHeader>
-                                <CardTitle>Products</CardTitle>
+                                <CardTitle>Account Information</CardTitle>
                                 <CardDescription>
-                                    Manage your products and view their sales performance.
+                                    Manage your account settings and preferences
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
-                                Hey
+                            <CardContent className="space-y-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Email</label>
+                                    <Input disabled value={userData?.email} />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Name</label>
+                                    <Input placeholder="Enter your name" value={userData?.name} />
+                                </div>
+                                <Button disabled={true}>
+                                    Save Changes
+                                </Button>
                             </CardContent>
                         </Card>
                     </TabsContent>
                     <TabsContent value="apikey">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>API Key</CardTitle>
+                                <CardDescription>
+                                    Manage your API key and generate new ones
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
                         {
                             initData?.key && (
                                 <div className="flex space-x-2 mb-4">
@@ -97,9 +110,24 @@ export function Settings({initData}:{initData?: any | null}) {
                         <br/>
                         {initData?.key && (
                             <span className={"text-red-500"}>
-                              {/*<ExclamationTriangleIcon className={"h-4 w-4 inline-block"} /> Caution: Re-generating API key will revoke earlier key and all applications using it will immediately stop working.*/}
+                              <AlertTriangle className={"h-4 w-4 inline-block"} /> Caution: Re-generating API key will revoke earlier key and all applications using it will immediately stop working.
                             </span>
-                        )}
+                                )}
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                    <TabsContent value="custom-domains">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Custom Domains</CardTitle>
+                                <CardDescription>
+                                    Manage your custom domains and add new ones
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                Feature coming soon!
+                            </CardContent>
+                        </Card>
                     </TabsContent>
                 </Tabs>
             </div>

@@ -35,12 +35,12 @@ export function Sites({initData}:{initData?: Site[]}) {
                         {
                             initData?.map((item: Site) => {
                                 return (
-                                    <Card key={`db-card-${item.id}`} className={"flex flex-row items-center text-center"}>
+                                    <Card key={`db-card-${item.id}`} className={"flex flex-row items-center text-center transition-all duration-200 hover:shadow-md hover:border-primary/20"}>
                                         <CardHeader className={"w-full flex flex-row items-center justify-between"}>
                                             <span>{item.name}</span>
                                             <div className={"flex flex-row !m-0"}>
                                                 <Link className={"mr-2"} key={`db-settings-${item.id}`} href={`/sites/${item.subdomain}`}>
-                                                    <Settings className={"h-8 w-8 p-2 rounded-full bg-gray-100 hover:bg-gray-300"}/>
+                                                    <Settings className={"h-8 w-8 p-1 rounded-full bg-secondary hover:bg-secondary/80 transition-colors border-2 border-transparent hover:border-primary"}/>
                                                 </Link>
                                             </div>
                                         </CardHeader>
@@ -49,10 +49,10 @@ export function Sites({initData}:{initData?: Site[]}) {
                             })
                         }
                         <Link href={"/sites/new"}>
-                            <Card className={"border border-dashed flex flex-row items-center text-center hover:bg-gray-100"}>
+                            <Card className={"border border-dashed flex flex-row items-center text-center transition-all duration-200 hover:shadow-md hover:bg-secondary/20"}>
                                 <CardHeader>
                                     <div className={"flex flex-row items-center justify-between"}>
-                                        <PlusCircle className={"h-8 w-8 mr-4 rounded-full p-1 text-gray-600"} />
+                                        <PlusCircle className={"h-8 w-8 mr-4 rounded-full p-1 text-muted-foreground transition-colors hover:text-primary"} />
                                         <span>Create</span>
                                     </div>
                                 </CardHeader>

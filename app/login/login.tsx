@@ -14,6 +14,7 @@ import {Button} from "@/components/ui/button";
 import {signIn, SignInResponse} from "next-auth/react";
 import Link from "next/link";
 import {Loader2} from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Login() {
     const [email, setEmail] = useState("")
@@ -63,9 +64,12 @@ export default function Login() {
         <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4 min-w-[340px]">
             <Card className="mx-auto max-w-sm min-w-[300px] md:min-w-[340px]">
                 <CardHeader>
-                    <CardTitle className="text-2xl">
-                        <Link href={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`}>{process.env.NEXT_PUBLIC_SITE_DOMAIN}</Link>
-                    </CardTitle>
+                    <div className="flex items-center justify-between">
+                        <CardTitle className="text-2xl">
+                            <Link href={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`}>{process.env.NEXT_PUBLIC_SITE_DOMAIN}</Link>
+                        </CardTitle>
+                        <ThemeToggle />
+                    </div>
                     <CardDescription>
                         Share, instantly.
                     </CardDescription>

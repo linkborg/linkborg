@@ -16,7 +16,7 @@ export function LogoutButton() {
     
     return (
         <div className={cn("grid gap-6")}>
-            <Button disabled={isLoading} type={"button"} onClick={() => handleLogout()}>
+            <Button variant={"outline"} disabled={isLoading} type={"button"} onClick={() => handleLogout()}>
                 {isLoading && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
