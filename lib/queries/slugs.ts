@@ -1,17 +1,10 @@
 import prisma from "@/lib/prisma";
 
 export const GetSlugById = async (slugId: string) => {
-	return prisma.slug.findFirst({
+	const result = await prisma.site.findFirst({
 		where: {
 			id: slugId || "a"
 		}
 	})
+	return result;
 }
-
-// export const GetSlugsList = async (user: User) => {
-// 	return prisma.slug.findMany({
-// 		where: {
-// 			userId: user?.id || "",
-// 		}
-// 	});
-// }

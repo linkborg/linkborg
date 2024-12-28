@@ -20,12 +20,12 @@ export const NewSiteForm = ({initData}:{initData?: any}) => {
     const [progress, setProgress] = useState(false);
     const router = useRouter();
     
-    const [debouncedSubdomain] = useDebounce(subdomainAvailable, 250);
+    const [debouncedSubdomain] = useDebounce(siteSubdomain, 250);
     
     useEffect(() => {
         setSubdomainAvailable("will-check")
         async function fn() {
-            if (siteSubdomain.length > 0) {
+            if (debouncedSubdomain.length > 0) {
                 setSubdomainAvailable("checking")
                 const response = await fetch("/api/slugs/check", {
                     method: "POST",
@@ -44,7 +44,7 @@ export const NewSiteForm = ({initData}:{initData?: any}) => {
             }
         }
         fn();
-    }, [siteSubdomain]);
+    }, [debouncedSubdomain]);
     
     
     const handleCreateSite = async () => {
