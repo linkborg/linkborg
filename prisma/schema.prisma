@@ -22,7 +22,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
   sites         Site[]
-  slugs         Slug[]
   newsletter    Boolean?  @default(true)
   newsletter_id String?
   theme         String?   @default("dark")
