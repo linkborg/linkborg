@@ -59,21 +59,21 @@ function PrivateNavEl() {
                 <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
                     <Link
                         href="/dashboard"
-                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-100 hover:text-gray-700 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/dashboard') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-800 hover:text-gray-300 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/dashboard') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
                     >
                         <Home className="h-4 w-4"/>
                         Dashboard
                     </Link>
                     <Link
                         href="/sites"
-                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-100 hover:text-gray-700 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/sites') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-800 hover:text-gray-300 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/sites') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
                     >
                         <Globe className="h-4 w-4"/>
                         Sites {" "}
                     </Link>
                     <Link
                         href="/links"
-                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-100 hover:text-gray-700 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/links') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-gray-800 hover:text-gray-300 focus:bg-gray-200 focus:text-gray-800 focus:outline-none ${pathname.startsWith('/links') ? "bg-gray-200 text-gray-800" : "text-gray-500"}`}
                     >
                         <Link2 className="h-4 w-4"/>
                         Links {" "}

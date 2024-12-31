@@ -1,14 +1,33 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "@/components/navigation";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Site} from "@prisma/client";
 import Link from "next/link";
-import {Copy, Settings, PlusCircle} from "lucide-react"
+import {Copy, Settings, PlusCircle, Trash2} from "lucide-react"
 
 export function Sites({initData}:{initData?: Site[]}) {
+    const [sites, setSites] = useState(initData)
+    
+    const handleDelete = async (siteId: string) => {
+        if (confirm("Are you sure you want to delete this site? This will delete all associated links.")) {
+            try {
+                const response = await fetch(`/api/sites/${siteId}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    setSites(prevSites => prevSites?.filter(site => site.id !== siteId));
+                } else {
+                    console.error("Failed to delete site");
+                }
+            } catch (error) {
+                console.error("Error deleting site:", error);
+            }
+        }
+    };
+
     return (
         <>
             <div className="flex items-center justify-between">
@@ -42,6 +61,14 @@ export function Sites({initData}:{initData?: Site[]}) {
                                                 <Link className={"mr-2"} key={`db-settings-${item.id}`} href={`/sites/${item.subdomain}`}>
                                                     <Settings className={"h-8 w-8 p-1 rounded-full bg-secondary hover:bg-secondary/80 transition-colors border-2 border-transparent hover:border-primary"}/>
                                                 </Link>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    onClick={() => handleDelete(item.id)}
+                                                    className="h-8 w-8"
+                                                >
+                                                    <Trash2 className="h-5 w-5 text-destructive hover:text-destructive/80" />
+                                                </Button>
                                             </div>
                                         </CardHeader>
                                     </Card>

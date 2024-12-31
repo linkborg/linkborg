@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import Link from "next/link";
 import {Link as SiteLink} from "@prisma/client"
-import {Copy, Settings, PlusCircle, ListFilter, MoreHorizontal} from "lucide-react"
+import {Copy, Settings, PlusCircle, ListFilter, MoreHorizontal, ExternalLink, Pencil, Trash2} from "lucide-react"
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {
 	DropdownMenu, DropdownMenuCheckboxItem,
@@ -27,6 +27,7 @@ import {
 	TableRow,
 } from "@/components/ui/table"
 import {formatDate} from "@/lib/utils";
+import { toast } from "@/components/ui/use-toast"
 
 
 export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: string}) {
@@ -46,11 +47,26 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 				if (response.ok) {
 					setData(prevData => prevData.filter(link => link.id !== linkId));
 				} else {
-					console.error("Failed to delete link");
+					const error = await response.json();
+					console.error("Failed to delete link:", error);
+					// You might want to show an error toast/notification here
 				}
 			} catch (error) {
 				console.error("Error deleting link:", error);
+				// You might want to show an error toast/notification here
 			}
+		}
+	};
+
+	const copyToClipboard = async (url: string) => {
+		try {
+			await navigator.clipboard.writeText(url);
+			toast({
+				title: "URL copied to clipboard",
+				duration: 2000,
+			});
+		} catch (err) {
+			console.error("Failed to copy URL:", err);
 		}
 	};
 
@@ -119,8 +135,17 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 													<div className="font-medium">{item.title}</div>
 												</TableCell>
 												<TableCell>
-													<div className="font-medium max-w-[180px] sm:max-w-[180px] md:max-w-[250px] lg:w-full overflow-hidden break-words">
-														{item.siteId}.{process.env.NEXT_PUBLIC_SITE_DOMAIN}/{item.slug}
+													<div className="flex items-center space-x-2">
+														<div className="font-medium max-w-[180px] sm:max-w-[180px] md:max-w-[250px] lg:w-full overflow-hidden break-words">
+															{item.siteId}.{process.env.NEXT_PUBLIC_SITE_DOMAIN}/{item.slug}
+														</div>
+														<Button
+															variant="ghost"
+															size="sm"
+															onClick={() => copyToClipboard(`${item.siteId}.${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${item.slug}`)}
+														>
+															<Copy className="h-4 w-4" />
+														</Button>
 													</div>
 													<div className="hidden text-sm text-muted-foreground md:inline">
 														{item.longurl}
@@ -144,8 +169,22 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 														</DropdownMenuTrigger>
 														<DropdownMenuContent align="end">
 															<DropdownMenuLabel>Actions</DropdownMenuLabel>
-															<DropdownMenuItem onClick={() => handleEdit(item.id)}>Edit</DropdownMenuItem>
-															<DropdownMenuItem onClick={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
+															<DropdownMenuItem onClick={() => handleEdit(item.id)}>
+																<Pencil className="mr-2 h-4 w-4" />
+																Edit
+															</DropdownMenuItem>
+															<DropdownMenuItem onClick={() => window.open(item.longurl, '_blank')}>
+																<ExternalLink className="mr-2 h-4 w-4" />
+																Visit URL
+															</DropdownMenuItem>
+															<DropdownMenuSeparator />
+															<DropdownMenuItem
+																onClick={() => handleDelete(item.id)}
+																className="text-destructive focus:text-destructive"
+															>
+																<Trash2 className="mr-2 h-4 w-4" />
+																Delete
+															</DropdownMenuItem>
 														</DropdownMenuContent>
 													</DropdownMenu>
 												</TableCell>

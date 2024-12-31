@@ -1,7 +1,6 @@
-import {User} from "next-auth";
-
 export interface LinkCreateRequest {
 	title: string;
+	description?: string;
 	slug: string;
 	longurl: string;
 	siteId: string;
@@ -9,12 +8,14 @@ export interface LinkCreateRequest {
 
 export interface LinkUpdateRequest {
 	id: string;
-	title: string;
-	slug: string;
-	longurl: string;
-	siteId: string;
+	title?: string;
+	description?: string; 
+	slug?: string;
+	longurl?: string;
+	siteId?: string;
 }
 
 export interface LinkDeleteRequest {
 	id: string;
+	siteId?: string;
 }

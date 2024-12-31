@@ -4,7 +4,7 @@ import AuthLayout from "@/app/auth-layout";
 import {redirect} from "next/navigation";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
-import {NewLinkForm} from "@/app/sites/[siteId]/links/new/new-link-form";
+import {LinkForm} from "@/components/links/link-form";
 import {GetSitesList} from "@/lib/queries/sites";
 
 export const metadata: Metadata = {
@@ -31,7 +31,13 @@ export default async function Page({params} : {params: {siteId: string}}) {
 	
 	return (
 		<AuthLayout>
-			<NewLinkForm sites={sites} activeSite={activeSite} />
+			<h1 className="text-lg font-semibold md:text-2xl mb-4">Create Link</h1>
+			<LinkForm 
+				mode="create"
+				sites={sites}
+				activeSite={activeSite}
+				suffix="/new"
+			/>
 		</AuthLayout>
 	)
 }

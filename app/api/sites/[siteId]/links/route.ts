@@ -10,19 +10,35 @@ export async function POST(req: NextRequest, { params }: { params: { siteId: str
 	const siteId = params.siteId;
 	const session = await getServerSession(authOptions);
 	const user = session?.user as User;
-	const data = await req.json();
 	
-	const site = await GetSiteById(user, siteId)
-	
-	if (site){
-		console.log("received payload: ", data)
+	if (!user) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
+	try {
+		const data = await req.json();
+		const site = await GetSiteById(user, siteId);
+		
+		if (!site) {
+			return NextResponse.json({ error: "Site not found or unauthorized" }, { status: 404 });
+		}
+
+		// Validate required fields
+		if (!data.title || !data.longurl || !data.slug) {
+			return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+		}
+
 		const new_link = await CreateLink({
 			title: data.title,
+			description: data.description,
 			longurl: data.longurl,
 			slug: data.slug,
 			siteId: site.id,
 		});
-		return NextResponse.json(site)
-	}
 
+		return NextResponse.json(new_link);
+	} catch (error) {
+		console.error("Error creating link:", error);
+		return NextResponse.json({ error: "Failed to create link" }, { status: 500 });
+	}
 }

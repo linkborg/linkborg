@@ -8,14 +8,22 @@ import {User} from "next-auth";
 export async function POST(req: NextRequest) {
 	const session = await getServerSession(authOptions);
 	const user = session?.user as User;
+	if (!user) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
 	const data = await req.json();
-	console.log("received payload: ", data)
-	const site = await CreateSite({
-		user,
-		name: data.name,
-		subdomain: data.subdomain,
-	});
-	return NextResponse.json(site)
+	try {
+		const site = await CreateSite({
+			user,
+			name: data.name,
+			subdomain: data.subdomain,
+		});
+		return NextResponse.json(site)
+	} catch (error) {
+		console.error("Error creating site:", error);
+		return NextResponse.json({ error: "Failed to create site" }, { status: 500 });
+	}
 }
 
 

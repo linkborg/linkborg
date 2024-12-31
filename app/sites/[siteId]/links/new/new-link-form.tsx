@@ -133,8 +133,8 @@ export const NewLinkForm = ({initData, sites, activeSite}:{initData?: SiteLink[]
 							{
 								slugAvailable === "will-check" && (<></>) ||
 								slugAvailable === "checking" && (<>Checking</>) ||
-								slugAvailable === "ok" && (<>Site is available</>) ||
-								slugAvailable === "exists" && (<>Site already exists, try another</>)
+								slugAvailable === "ok" && (<>Short link is available</>) ||
+								slugAvailable === "exists" && (<>Short link already exists, try another</>)
 							}
 						</div>
 					</CardFooter>
