@@ -173,7 +173,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 																<Pencil className="mr-2 h-4 w-4" />
 																Edit
 															</DropdownMenuItem>
-															<DropdownMenuItem onClick={() => window.open(item.longurl, '_blank')}>
+															<DropdownMenuItem onClick={() => window.open(item.longurl || '', '_blank')}>
 																<ExternalLink className="mr-2 h-4 w-4" />
 																Visit URL
 															</DropdownMenuItem>
