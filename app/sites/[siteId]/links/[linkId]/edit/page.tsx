@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { GetLinkById } from "@/lib/queries/links";
 import { LinkForm } from "@/components/links/link-form";
+import { GetSiteById } from "@/lib/queries/sites";
 
 export const metadata: Metadata = {
     title: `Edit Link - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
@@ -27,13 +28,18 @@ export default async function Page({
         redirect(`/sites/${params.siteId}/links`);
     }
 
+    const activeSite = await GetSiteById(user, params.siteId);
+    if (!activeSite) {
+        redirect("/sites");
+    }
+
     return (
         <AuthLayout>
             <h1 className="text-lg font-semibold md:text-2xl mb-4">Edit Link</h1>
             <LinkForm 
                 mode="edit"
                 initialData={link}
-                activeSite={{ id: params.siteId, subdomain: link.siteId }}
+                activeSite={activeSite}
             />
         </AuthLayout>
     );
