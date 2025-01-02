@@ -6,6 +6,10 @@ import {Metadata} from "next";
 
 import {redirect} from "next/navigation";
 import {GetSitesList} from "@/lib/queries/sites";
+import { GetAllLinksOfUser } from "@/lib/queries/links";
+import { getTopSites } from "@/lib/queries/stats";
+import { getTopLinks } from "@/lib/queries/stats";
+import { getUserStats } from "@/lib/queries/stats";
 
 export const metadata: Metadata = {
     title: `Dashboard - ${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
@@ -19,12 +23,14 @@ export default async function Page() {
     if(!user){
         redirect("/login")
     }
-    
-    const sites = await GetSitesList(user)
-    
+
+    const stats = await getUserStats(user.id);
+    const popularLinks = await getTopLinks(user.id);
+    const popularSites = await getTopSites(user.id);
+        
     return (
         <AuthLayout>
-            <Dashboard initData={sites} />
+            <Dashboard stats={stats} popularLinks={popularLinks} popularSites={popularSites} />
         </AuthLayout>
     );
 }

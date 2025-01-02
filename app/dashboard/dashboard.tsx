@@ -4,8 +4,9 @@ import Link from "next/link";
 import {Card, CardDescription, CardFooter, CardHeader} from "@/components/ui/card";
 import React from "react";
 import {Rocket} from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
-export function Dashboard({initData} : {initData?: any}) {
+export function Dashboard({stats, popularLinks, popularSites}: {stats: any, popularLinks: any, popularSites: any}) {
     return (
         <>
             <div className="flex items-center justify-between">
@@ -13,26 +14,54 @@ export function Dashboard({initData} : {initData?: any}) {
                 <div className={"block md:hidden"}><Navigation/></div>
             </div>
             {
-                initData.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 text-center">
-                        {initData.map((app: any) => {
-                            return (
-                                <Link key={`app-key-${app.id}`} target={"_blank"} href={`https://${app.subdomain}.${process.env.NEXT_PUBLIC_SITE_DOMAIN}`}>
-                                    <Card className={"border border-dashed hover:bg-secondary/50 transition-all duration-200 hover:shadow-md hover:border-primary"}>
-                                        <CardHeader className={"flex flex-row items-center text-center"}>
-                                            <div className={"flex flex-row items-center justify-between"}>
-                                                <Rocket className={"h-6 w-6 mr-4 text-muted-foreground"} />
-                                                <span>{app.name}</span>
-                                            </div>
-                                        </CardHeader>
-                                        <CardFooter className={"bg-primary/20 text-sm py-2 rounded-b-xl"}>
-                                            {app.updatedAt.toTimeString()}
-                                        </CardFooter>
-                                    </Card>
-                                </Link>
-                            )
-                        })}
-                    </div>
+                stats ? (
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <Card>
+                        <CardHeader>
+                            <h2 className="text-xl font-semibold">Statistics</h2>
+                        </CardHeader>
+                        <CardDescription>
+                            <p>Total Visits: {stats.totalVisits}</p>
+                            <p>Unique Visitors: {stats.uniqueVisitors}</p>
+                            <p>Bounce Rate: {stats.bounceRate}%</p>
+                        </CardDescription>
+                        <CardFooter>
+                            <p>Last Updated: {formatDate(stats.lastUpdated)}</p>
+                        </CardFooter>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            <h2 className="text-xl font-semibold">Popular Links</h2>
+                        </CardHeader>
+                        <CardDescription>
+                            <ul>
+                                {popularLinks.map((link: any, index: number) => (
+                                    <li key={index}>
+                                        <a href={link.url} target="_blank" rel="noopener noreferrer">
+                                            {link.title} - {link.visits} visits
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </CardDescription>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            <h2 className="text-xl font-semibold">Popular Sites</h2>
+                        </CardHeader>
+                        <CardDescription>
+                            <ul>
+                                {popularSites.map((site: any, index: number) => (
+                                    <li key={index}>
+                                        <a href={site.url} target="_blank" rel="noopener noreferrer">
+                                            {site.name} - {site.visits} visits
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </CardDescription>
+                    </Card>
+                </div>
                 ) : (
                     <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
                         <div className="flex flex-col items-center gap-1 text-center">

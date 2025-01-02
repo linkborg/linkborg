@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {NextAuthProvider} from "@/app/session-provider";
 import { ThemeProvider } from "@/app/theme-provider"
-import UmamiProvider from 'next-umami'
-import Head from "next/head";
+import { CSPostHogProvider } from "@/app/posthog-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +17,6 @@ export default function RootLayout({children}: Readonly<{
 }>) {
   return (
       <html lang="en" suppressHydrationWarning>
-        <Head>
-          <UmamiProvider src={process.env.NEXT_PUBLIC_UMAMI_SRC || ""} websiteId={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ""} />
-        </Head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
@@ -28,9 +24,11 @@ export default function RootLayout({children}: Readonly<{
             enableSystem
             disableTransitionOnChange
           >
-            <NextAuthProvider>
-                {children}
-            </NextAuthProvider>
+            <CSPostHogProvider>
+                <NextAuthProvider>
+                    {children}
+                </NextAuthProvider>
+            </CSPostHogProvider>
           </ThemeProvider>
         </body>
       </html>
