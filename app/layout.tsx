@@ -4,6 +4,7 @@ import "./globals.css";
 import {NextAuthProvider} from "@/app/session-provider";
 import { ThemeProvider } from "@/app/theme-provider"
 import UmamiProvider from 'next-umami'
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,9 @@ export default function RootLayout({children}: Readonly<{
 }>) {
   return (
       <html lang="en" suppressHydrationWarning>
-        <head>
+        <Head>
           <UmamiProvider src={process.env.NEXT_PUBLIC_UMAMI_SRC || ""} websiteId={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ""} />
-        </head>        
+        </Head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
