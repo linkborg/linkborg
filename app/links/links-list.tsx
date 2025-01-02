@@ -30,7 +30,7 @@ import {formatDate} from "@/lib/utils";
 import { toast } from "@/components/ui/use-toast"
 
 
-export function LinksList({initData}:{initData: SiteLink[]}) {
+export function LinksList({initData, useSiteId}:{initData: SiteLink[], useSiteId?: string}) {
 	const router = useRouter();
 	const [data, setData] = useState(initData);
 
@@ -101,7 +101,7 @@ export function LinksList({initData}:{initData: SiteLink[]}) {
 								</DropdownMenuCheckboxItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
-						<Link href={`/links/new`}>
+						<Link href={useSiteId ? `/sites/${useSiteId}/links/new` : `/links/new`}>
 							<Button size="sm" className="h-8 gap-1">
 								<PlusCircle className="h-3.5 w-3.5"/>
 								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -120,7 +120,7 @@ export function LinksList({initData}:{initData: SiteLink[]}) {
 							<Table>
 								<TableHeader>
 									<TableRow>
-										<TableHead>Site</TableHead>
+										{!useSiteId && <TableHead>Site</TableHead>}
 										<TableHead className={"hidden sm:table-cell"}>Title</TableHead>
 										<TableHead>URL</TableHead>
 										<TableHead className="hidden lg:table-cell">Created</TableHead>
@@ -132,9 +132,9 @@ export function LinksList({initData}:{initData: SiteLink[]}) {
 									{
 										initData.map((item) => (
 											<TableRow key={`link-list-key-${item.id}`}>
-												<TableCell>
+												{!useSiteId && <TableCell>
 													<div className="font-medium">{item.siteId}</div>
-												</TableCell>
+												</TableCell>}
 												<TableCell className={"hidden sm:table-cell"}>
 													<div className="font-medium">{item.title}</div>
 												</TableCell>

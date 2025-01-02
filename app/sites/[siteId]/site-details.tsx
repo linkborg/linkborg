@@ -105,7 +105,7 @@ export function SiteDetails({initData}: { initData: any }) {
                             </div>
                         </CardFooter>
                     </Card>
-                        <LinksList initData={initData.links} siteId={initData.id} />
+                        <LinksList initData={initData.links} useSiteId={initData.id} />
                     </div>
                     <div className={"hidden md:block h-full"}>
                         <SitePreview initData={initData} />

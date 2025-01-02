@@ -34,7 +34,7 @@ export default async function Page({params} : {params: {siteId: string}}) {
 	
 	return (
 		<AuthLayout>
-			<SiteLinks initData={links} sites={sites} activeSite={activeSite} />
+			<SiteLinks initData={links} activeSite={activeSite} />
 		</AuthLayout>
 	)
 }

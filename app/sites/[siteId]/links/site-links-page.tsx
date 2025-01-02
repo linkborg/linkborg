@@ -6,17 +6,15 @@ import Navigation from "@/components/navigation";
 import Link from "next/link";
 import {Link as SiteLink, Site} from "@prisma/client"
 import {LinksList} from "@/app/links/links-list";
-import {LinksSiteSelector} from "@/app/links/links-site-selector";
 
-export function SiteLinks({initData, sites, activeSite}:{initData: SiteLink[], sites: Site[], activeSite: Site}) {
-	
+export function SiteLinks({initData, activeSite}:{initData: SiteLink[], activeSite: Site}) {
+
 	return (
 		<>
 			<div className="flex items-center justify-between">
 				<h1 className="text-lg font-semibold md:text-2xl">Links</h1>
 				<div className={"block md:hidden"}><Navigation/></div>
 			</div>
-			<LinksSiteSelector sites={sites} activeSite={activeSite} />
 			{
 				initData?.length === 0 ? (
 					<div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
@@ -34,7 +32,7 @@ export function SiteLinks({initData, sites, activeSite}:{initData: SiteLink[], s
 					</div>
 				) : (
 					<div className="w-full">
-						<LinksList initData={initData} siteId={activeSite.id} />
+						<LinksList initData={initData} useSiteId={activeSite.id} />
 					</div>
 				)
 			}
