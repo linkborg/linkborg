@@ -2,8 +2,8 @@ import {Metadata} from "next";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
 import {redirect} from "next/navigation";
-import {GetAllLinksOfUser} from "@/lib/queries/links";
-import { LinksList } from "@/app/links/links-list";
+import {GetSitesList} from "@/lib/queries/sites";
+import { LinksSiteSelector } from "@/app/links/new/links-site-selector";
 import AuthLayout from "@/app/auth-layout";
 
 export const metadata: Metadata = {
@@ -19,11 +19,11 @@ export default async function Page() {
 		redirect("/login")
 	}
 	
-	const links = await GetAllLinksOfUser(user);
+	const sites = await GetSitesList(user);
 	
 	return (
 		<AuthLayout>
-			<LinksList initData={links} />
+			<LinksSiteSelector sites={sites} />
 		</AuthLayout>
 	)
 }

@@ -1,5 +1,17 @@
 import prisma from "@/lib/prisma";
 import {LinkCreateRequest, LinkUpdateRequest, LinkDeleteRequest} from "@/types/links";
+import {User} from "next-auth";
+
+// Get all links of user
+export const GetAllLinksOfUser = async (user: User) => {
+	return prisma.link.findMany({
+		where: {
+			site: {
+				userId: user.id
+			}
+		}
+	})
+}
 
 // Get single link by ID
 export const GetLinkById = async (id: string, siteId?: string) => {

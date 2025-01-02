@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import { useDebounce } from "use-debounce"
 import { Site, Link as SiteLink } from "@prisma/client"
-import { LinksSiteSelector } from "@/app/links/links-site-selector"
 
 interface LinkFormProps {
     mode: 'create' | 'edit'
@@ -80,7 +79,6 @@ export const LinkForm = ({ mode, initialData, sites, activeSite, suffix }: LinkF
 
     return (
         <>
-            {sites && <LinksSiteSelector sites={sites} activeSite={activeSite} suffix={suffix} />}
             <Card>
                 <CardHeader>
                     <CardTitle>

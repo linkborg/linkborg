@@ -30,15 +30,15 @@ import {formatDate} from "@/lib/utils";
 import { toast } from "@/components/ui/use-toast"
 
 
-export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: string}) {
+export function LinksList({initData}:{initData: SiteLink[]}) {
 	const router = useRouter();
 	const [data, setData] = useState(initData);
 
-	const handleEdit = (linkId: string) => {
+	const handleEdit = (linkId: string, siteId: string) => {
 		router.push(`/sites/${siteId}/links/${linkId}/edit`);
 	};
 	
-	const handleDelete = async (linkId: string) => {
+	const handleDelete = async (linkId: string, siteId: string) => {
 		if (confirm("Are you sure you want to delete this link?")) {
 			try {
 				const response = await fetch(`/api/sites/${siteId}/links/${linkId}`, {
@@ -101,7 +101,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 								</DropdownMenuCheckboxItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
-						<Link href={`/sites/${siteId}/links/new`}>
+						<Link href={`/links/new`}>
 							<Button size="sm" className="h-8 gap-1">
 								<PlusCircle className="h-3.5 w-3.5"/>
 								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -120,6 +120,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 							<Table>
 								<TableHeader>
 									<TableRow>
+										<TableHead>Site</TableHead>
 										<TableHead className={"hidden sm:table-cell"}>Title</TableHead>
 										<TableHead>URL</TableHead>
 										<TableHead className="hidden lg:table-cell">Created</TableHead>
@@ -131,6 +132,9 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 									{
 										initData.map((item) => (
 											<TableRow key={`link-list-key-${item.id}`}>
+												<TableCell>
+													<div className="font-medium">{item.siteId}</div>
+												</TableCell>
 												<TableCell className={"hidden sm:table-cell"}>
 													<div className="font-medium">{item.title}</div>
 												</TableCell>
@@ -169,7 +173,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 														</DropdownMenuTrigger>
 														<DropdownMenuContent align="end">
 															<DropdownMenuLabel>Actions</DropdownMenuLabel>
-															<DropdownMenuItem onClick={() => handleEdit(item.id)}>
+															<DropdownMenuItem onClick={() => handleEdit(item.id, item.siteId || '')}>
 																<Pencil className="mr-2 h-4 w-4" />
 																Edit
 															</DropdownMenuItem>
@@ -179,7 +183,7 @@ export function LinksList({initData, siteId}:{initData: SiteLink[], siteId: stri
 															</DropdownMenuItem>
 															<DropdownMenuSeparator />
 															<DropdownMenuItem
-																onClick={() => handleDelete(item.id)}
+																onClick={() => handleDelete(item.id, item.siteId || '')}
 																className="text-destructive focus:text-destructive"
 															>
 																<Trash2 className="mr-2 h-4 w-4" />
