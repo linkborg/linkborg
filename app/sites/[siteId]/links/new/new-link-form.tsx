@@ -10,10 +10,9 @@ import {useRouter} from "next/navigation";
 
 import {Label} from "@/components/ui/label";
 import {useDebounce} from "use-debounce";
-import {LinksSiteSelector} from "@/app/links/links-site-selector";
 import {Site, Link as SiteLink} from "@prisma/client";
 
-export const NewLinkForm = ({initData, sites, activeSite}:{initData?: SiteLink[], sites: Site[], activeSite: Site}) => {
+export const NewLinkForm = ({initData, activeSite}:{initData?: SiteLink[], activeSite: Site}) => {
 	
 	const [linkTitle, setLinkTitle] = useState("Untitled Link");
 	const [linkSlug, setLinkSlug] = useState("");
@@ -74,7 +73,6 @@ export const NewLinkForm = ({initData, sites, activeSite}:{initData?: SiteLink[]
 				<h1 className="text-lg font-semibold md:text-2xl">Create Link</h1>
 				<div className={"block md:hidden"}><Navigation/></div>
 			</div>
-			<LinksSiteSelector sites={sites} activeSite={activeSite} suffix={"/new"} />
 			<div className="grid grid-cols-1 gap-4 max-w-2xl">
 				<Card>
 					<CardHeader>

@@ -34,7 +34,6 @@ export default async function Page({params} : {params: {siteId: string}}) {
 			<h1 className="text-lg font-semibold md:text-2xl mb-4">Create Link</h1>
 			<LinkForm 
 				mode="create"
-				sites={sites}
 				activeSite={activeSite}
 				suffix="/new"
 			/>
